@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: dimgrey;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            position: relative;
+        }
+
+        nav {
+            display: flex;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        button {
+            border: none;
+            border-radius: 5px;
+            font-size: larger;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 0 5px;
+            background-color: darkgray;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #555;
+            transform: scale(1.05); /* Grow the button by 5% on hover */
+        }
+
+        button#Home {
+            background-color: #4CAF50;
+        }
+
+        button#Earn {
+            background-color: #008CBA;
+        }
+
+        button#Withdraw {
+            background-color: #f44336;
+        }
+
+        #admin-panel {
+            display: none;
+            position: absolute;
+            top: 20px; /* Adjusted position */
+            right: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999; /* Ensure it's above the text */
+        }
+
+        #access-form {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #notify-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        #notify-menu button {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+    <title>BloxEarn</title>
+</head>
+<body>
+    <nav>
+        <button id="Home">Home</button>
+        <button id="Earn">Earn</button>
+        <button id="Withdraw">Withdraw</button>
+    </nav>
+
+    <div id="access-form">
+        <label for="id">Enter your ID:</label><br>
+        <input type="text" id="id" name="id"><br>
+        <button onclick="validateAccess()">Submit</button>
+    </div>
+
+    <div id="admin-panel">
+        <h2>Welcome to the Admin Panel!</h2>
+        <button onclick="toggleNotifyMenu()">Notify Everyone</button>
+        <div id="notify-menu">
+            <button onclick="notifyAll('Founder: Hello!')">Hello!</button>
+            <button onclick="notifyAll('Founder: ope you like the website')">Hope you like the web </button>
+            <button onclick="notifyAll('Founder: Givaway about to happen')">Givaway</button>
+            <button onclick="toggleNotifyMenu()">Close</button> <!-- Close button added -->
+        </div>
+    </div>
+
+    <script>
+        function validateAccess() {
+            var enteredId = document.getElementById("id").value;
+            // List of valid IDs
+            var validIds = ["admin123", "superadmin", "adminuser"];
+
+            if (validIds.includes(enteredId)) {
+                // Show the admin panel if the ID is valid
+                document.getElementById("access-form").style.display = "none";
+                document.getElementById("admin-panel").style.display = "block";
+            } else {
+                alert("Invalid ID. Access denied!");
+            }
+        }
+
+        function toggleNotifyMenu() {
+            var notifyMenu = document.getElementById("notify-menu");
+            if (notifyMenu.style.display === "block") {
+                notifyMenu.style.display = "none";
+            } else {
+                notifyMenu.style.display = "block";
+            }
+        }
+
+        function notifyAll(message) {
+            alert("Notification sent to everyone: " + message);
+        }
+    </script>
+</body>
+</html>
